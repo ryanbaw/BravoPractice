@@ -60,7 +60,7 @@ build)
 	cd $BASE_HOME/WebRoot
 	
 	echo $"Create war package ..."
-	jar cvf $BASE_HOME/BravoProject.war *.html css images js
+	jar cvf $BASE_HOME/BravoProject.war *.html *.jsp css images js
 
 	cd $BASE_HOME
 	cp BravoProject.war /home/pi/java/WebServ/apache-tomcat-8.0.24/webapps
