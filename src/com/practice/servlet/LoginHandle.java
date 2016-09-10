@@ -12,12 +12,12 @@ import dao.ItemsDAO;
 import entity.Cart;
 import entity.Items;
 
-public class SignUpHandle extends HttpServlet {
+public class LoginHandle extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public SignUpHandle() {
+	public LoginHandle() {
 		super();
 	}
 
@@ -62,8 +62,7 @@ public class SignUpHandle extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		out.println("注册成功");
-		
+		out.println("登录成功");
 	}
 
 	/**

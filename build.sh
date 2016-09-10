@@ -29,38 +29,25 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-BASE_HOME=~/java/X/BravoProject
+BASE_HOME=`pwd`
 
 case "$1" in
 build)
-	# mkdir -p $BASE_HOME/WebRoot/WEB-INF/classes/ata/wx/shopping/busbean
-	# mkdir -p $BASE_HOME/WebRoot/WEB-INF/classes/ata/wx/shopping/dao
-	# mkdir -p $BASE_HOME/WebRoot/WEB-INF/classes/ata/wx/shopping/dbc
-	# mkdir -p $BASE_HOME/WebRoot/WEB-INF/classes/ata/wx/shopping/factory
-	# mkdir -p $BASE_HOME/WebRoot/WEB-INF/classes/ata/wx/shopping/filter
-	# mkdir -p $BASE_HOME/WebRoot/WEB-INF/classes/ata/wx/shopping/servlet
-	# mkdir -p $BASE_HOME/WebRoot/WEB-INF/classes/ata/wx/shopping/test
-	# mkdir -p $BASE_HOME/WebRoot/WEB-INF/classes/ata/wx/shopping/util
-	# mkdir -p $BASE_HOME/WebRoot/WEB-INF/classes/ata/wx/shopping/vo
+	mkdir -p $BASE_HOME/WebRoot/WEB-INF/classes/com/practice/servlet
+	mkdir -p $BASE_HOME/WebRoot/WEB-INF/classes/com/practice/dao
+	mkdir -p $BASE_HOME/WebRoot/WEB-INF/classes/com/practice/vo
 
-	# TARGET_DIR=$BASE_HOME/WebRoot/WEB-INF/classes
-	# cd $BASE_HOME/src
-	# echo $"compiling classes ..."
-	# javac -d $TARGET_DIR ata/wx/shopping/dbc/*.java
-	# javac -d $TARGET_DIR ata/wx/shopping/factory/*.java
-	# javac -d $TARGET_DIR ata/wx/shopping/util/*.java
-	# javac -d $TARGET_DIR ata/wx/shopping/vo/*.java
-	# javac -d $TARGET_DIR ata/wx/shopping/dao/*.java
-	# javac -d $TARGET_DIR ata/wx/shopping/filter/*.java
-
-	# javac -d $TARGET_DIR -classpath ata/wx/shopping/factory:ata/wx/shopping/util:ata/wx/shopping/vo:$CLASSPATH ata/wx/shopping/busbean/*.java
-	# javac -d $TARGET_DIR -classpath ata/wx/shopping/util:ata/wx/shopping/busbean:ata/wx/shopping/dao:ata/wx/shopping/factory:ata/wx/shopping/vo:$CLASSPATH ata/wx/shopping/servlet/*.java
-	# javac -d $TARGET_DIR -classpath ata/wx/shopping/dao:ata/wx/shopping/vo:ata/wx/shopping/factory:ata/wx/shopping/busbean:$CLASSPATH ata/wx/shopping/test/*.java
+	TARGET_DIR=$BASE_HOME/WebRoot/WEB-INF/classes
+	cd $BASE_HOME/src
+	echo $"compiling classes ..."
+	javac -d $TARGET_DIR com/practice/dao/*.java
+	javac -d $TARGET_DIR com/practice/vo/*.java
+	javac -d $TARGET_DIR -classpath com/practice/dao:com/practice/vo:$CLASSPATH com/practice/servlet/*.java
 
 	cd $BASE_HOME/WebRoot
 	
 	echo $"Create war package ..."
-	jar cvf $BASE_HOME/BravoProject.war *.html *.jsp css images js
+	jar cvf $BASE_HOME/BravoProject.war *.jsp css images js sql WEB-INF
 
 	cd $BASE_HOME
 	cp BravoProject.war /home/pi/java/WebServ/apache-tomcat-8.0.24/webapps
