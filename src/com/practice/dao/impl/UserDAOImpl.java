@@ -5,11 +5,11 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.practice.dao.UserDAO;
+import com.practice.dao.UsersDAO;
 import com.practice.dbc.DatabaseControl;
 import com.practice.vo.Users;
 
-public class UserDAOImpl implements UserDAO {
+public class UserDAOImpl implements UsersDAO {
 	// Private String username;
 	// Private String password;
 	// Private String phone;
@@ -69,7 +69,7 @@ public class UserDAOImpl implements UserDAO {
 
 	public void insert(Users user) throws Exception {
 
-		String sql="INSERT INTO user (username,password,email,tel,address,sex,age,regtime) VALUES (?,?,?,?,?,?,?,?) ";
+		String sql="INSERT INTO user (username,password,phone,email,address,sex,age,money,regtime) VALUES (?,?,?,?,?,?,?,?,?)";
 		PreparedStatement pstmt = null;
 		DatabaseControl dbc = null;
 		
@@ -80,12 +80,13 @@ public class UserDAOImpl implements UserDAO {
 			pstmt = dbc.getConnection().prepareStatement(sql);
 			pstmt.setString(1, user.getUsername());
 			pstmt.setString(2, user.getPassword());
-			pstmt.setString(3, user.getEmail());
-			pstmt.setString(4, user.getTel());
+			pstmt.setString(3, user.getPhone());
+			pstmt.setString(4, user.getEmail());
 			pstmt.setString(5, user.getAddress());
 			pstmt.setString(6, user.getSex());
 			pstmt.setInt(7, user.getAge());
-			pstmt.setString(8, user.getRegtime());
+			pstmt.setInt(8, user.getMoney());
+			pstmt.setString(9, user.getRegtime());
 			// 进行数据库更新操作
 			pstmt.executeUpdate();
 			pstmt.close();
@@ -123,10 +124,10 @@ public class UserDAOImpl implements UserDAO {
 
 	}
 
-	public void insert(String username, String password, String email,
-			String tel, String address, String sex, int age, String regtime)
+	public void insert(String username, String password, String phone,
+			String email, String address, String sex, int age, double money, String regtime)
 			throws Exception {
-		String sql="INSERT INTO user (username,password,email,tel,address,sex,age,regtime) VALUES (?,?,?,?,?,?,?,?) ";
+		String sql="INSERT INTO user (username,password,phone,email,address,sex,age,money,regtime) VALUES (?,?,?,?,?,?,?,?,?)";
 		PreparedStatement pstmt = null;
 		DatabaseControl dbc = null;
 		
@@ -137,12 +138,13 @@ public class UserDAOImpl implements UserDAO {
 			pstmt = dbc.getConnection().prepareStatement(sql);
 			pstmt.setString(1, username);
 			pstmt.setString(2, password);
-			pstmt.setString(3, email);
-			pstmt.setString(4, tel);
+			pstmt.setString(3, phone);
+			pstmt.setString(4, email);
 			pstmt.setString(5, address);
 			pstmt.setString(6, sex);
 			pstmt.setInt(7, age);
-			pstmt.setString(8, regtime);
+			pstmt.setDouble(8, money);
+			pstmt.setString(9, regtime);
 			// 进行数据库更新操作
 			pstmt.executeUpdate();
 			pstmt.close();
@@ -176,12 +178,13 @@ public class UserDAOImpl implements UserDAO {
 				Users user=new Users();
 				user.setUsername(rs.getString(1));
 				user.setPassword(rs.getString(2));
-				user.setEmail(rs.getString(3));
-				user.setTel(rs.getString(4));
+				user.setPhone(rs.getString(3));
+				user.setEmail(rs.getString(4));
 				user.setAddress(rs.getString(5));
 				user.setSex(rs.getString(6));
 				user.setAge(rs.getInt(7));
-				user.setRegtime(rs.getString(8));
+				user.setMoney(rs.getDouble(8));
+				user.setRegtime(rs.getString(9));
 				// 将查询出来的数据加入到List对象之中
 				userlist.add(user);
 			}
@@ -218,7 +221,7 @@ public class UserDAOImpl implements UserDAO {
 				user.setUsername(rs.getString(1));
 				user.setPassword(rs.getString(2));
 				user.setEmail(rs.getString(3));
-				user.setTel(rs.getString(4));
+				user.setPhone(rs.getString(4));
 				user.setAddress(rs.getString(5));
 				user.setSex(rs.getString(6));
 				user.setAge(rs.getInt(7));
@@ -294,7 +297,7 @@ public class UserDAOImpl implements UserDAO {
 					user.setUsername(rs.getString(1));
 					user.setPassword(rs.getString(2));
 					user.setEmail(rs.getString(3));
-					user.setTel(rs.getString(4));
+					user.setPhone(rs.getString(4));
 					user.setAddress(rs.getString(5));
 					user.setSex(rs.getString(6));
 					user.setAge(rs.getInt(7));
@@ -316,7 +319,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	public void update(Users user) throws Exception {
-		String sql = "UPDATE user SET password=?,email=?,tel=?,address=?,sex=?,age=?,regtime=? WHERE username=?";
+		String sql = "UPDATE user SET password=?,email=?,phone=?,address=?,sex=?,age=?,regtime=? WHERE username=?";
 		PreparedStatement pstmt = null;
 		DatabaseControl dbc = null;
 		
@@ -327,7 +330,7 @@ public class UserDAOImpl implements UserDAO {
 			pstmt = dbc.getConnection().prepareStatement(sql);
 			pstmt.setString(1, user.getPassword());
 			pstmt.setString(2, user.getEmail());
-			pstmt.setString(3, user.getTel());
+			pstmt.setString(3, user.getPhone());
 			pstmt.setString(4, user.getAddress());
 			pstmt.setString(5, user.getSex());
 			pstmt.setInt(6, user.getAge());
@@ -423,9 +426,9 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	public void updtae(String username, String password, String email,
-			String tel, String address, String sex, int age, String regtime)
+			String phone, String address, String sex, int age, String regtime)
 			throws Exception {
-		String sql = "UPDATE user SET password=?,email=?,tel=?,address=?,sex=?,age=?,regtime=? WHERE username=?";
+		String sql = "UPDATE user SET password=?,email=?,phone=?,address=?,sex=?,age=?,regtime=? WHERE username=?";
 		PreparedStatement pstmt = null;
 		DatabaseControl dbc = null;
 		
@@ -436,7 +439,7 @@ public class UserDAOImpl implements UserDAO {
 			pstmt = dbc.getConnection().prepareStatement(sql);
 			pstmt.setString(1, password);
 			pstmt.setString(2, email);
-			pstmt.setString(3, tel);
+			pstmt.setString(3, phone);
 			pstmt.setString(4, address);
 			pstmt.setString(5, sex);
 			pstmt.setInt(6, age);

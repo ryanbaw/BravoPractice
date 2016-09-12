@@ -33,15 +33,19 @@ BASE_HOME=`pwd`
 
 case "$1" in
 build)
-	mkdir -p $BASE_HOME/WebRoot/WEB-INF/classes/com/practice/servlet
 	mkdir -p $BASE_HOME/WebRoot/WEB-INF/classes/com/practice/dao
+	mkdir -p $BASE_HOME/WebRoot/WEB-INF/classes/com/practice/dao/impl
+	mkdir -p $BASE_HOME/WebRoot/WEB-INF/classes/com/practice/dbc
+	mkdir -p $BASE_HOME/WebRoot/WEB-INF/classes/com/practice/servlet
 	mkdir -p $BASE_HOME/WebRoot/WEB-INF/classes/com/practice/vo
 
 	TARGET_DIR=$BASE_HOME/WebRoot/WEB-INF/classes
 	cd $BASE_HOME/src
 	echo $"compiling classes ..."
 	javac -d $TARGET_DIR com/practice/dao/*.java
+	javac -d $TARGET_DIR com/practice/dao/impl/*.java
 	javac -d $TARGET_DIR com/practice/vo/*.java
+	javac -d $TARGET_DIR com/practice/dbc/*.java
 	javac -d $TARGET_DIR -classpath com/practice/dao:com/practice/vo:$CLASSPATH com/practice/servlet/*.java
 
 	cd $BASE_HOME/WebRoot
