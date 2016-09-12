@@ -52,6 +52,15 @@ build)
 	cd $BASE_HOME
 	cp BravoProject.war /home/pi/java/WebServ/apache-tomcat-8.0.24/webapps
 	;;
+update)
+	cd $BASE_HOME/WebRoot
+	
+	echo $"Create war package ..."
+	jar cvf $BASE_HOME/BravoProject.war *.jsp css images js sql WEB-INF
+
+	cd $BASE_HOME
+	cp BravoProject.war /home/pi/java/WebServ/apache-tomcat-8.0.24/webapps
+	;;
 clean)
 	rm -rf $BASE_HOME/WebRoot/WEB-INF/classes/*
 	rm BravoProject.war

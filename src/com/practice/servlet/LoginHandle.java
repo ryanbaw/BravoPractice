@@ -8,9 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.ItemsDAO;
-import entity.Cart;
-import entity.Items;
+import com.practice.dao.*;
 
 public class LoginHandle extends HttpServlet {
 

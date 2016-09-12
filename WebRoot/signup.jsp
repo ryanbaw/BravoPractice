@@ -48,12 +48,18 @@ request.setAttribute("tomcatExamplesUrl", "/examples/");
                     <input name="invitationcode" type="text" class="kuang_txt possword" placeholder="邀请码">
                     <input name="pincodes" type="text" class="kuang_txt yanzm" placeholder="验证码">
                     <div>
-                        <div class="hui_kuang"><img src="images/zc_22.jpg" width="92" height="31"></div>
-                        <div class="shuaxin"><a href="#"><img src="images/zc_25.jpg" width="13" height="14"></a></div>
+                        <div class="hui_kuang">
+                            <img src="images/zc_22.jpg" width="92" height="31">
+                        </div>
+                        <div class="shuaxin">
+                            <a href="#">
+                                <img src="images/zc_25.jpg" width="13" height="14">
+                            </a>
+                        </div>
                     </div>
                     <div>
                         <input name="" type="checkbox" value="">
-                        <span>已阅读并同意<a href="#" target="_blank"><span class="lan">《XXXXX使用协议》</span></a></span>
+                        <span>已阅读并同意<a href="#" target="_blank"><span class="lan">《霸王条款》</span></a></span>
                     </div>
                     <input name="注册" type="button" class="btn_zhuce" value="注册">
                 </form>
@@ -63,7 +69,7 @@ request.setAttribute("tomcatExamplesUrl", "/examples/");
                 <a href="#" class="zhuce_qq">QQ注册</a>
                 <a href="#" class="zhuce_wb">微博注册</a>
                 <a href="#" class="zhuce_wx">微信注册</a>
-                <p>已有账号？<a href="login.html">立即登录</a></p>
+                <p>已有账号？<a href="login.jsp">立即登录</a></p>
             </div>
         </div>
     </div>

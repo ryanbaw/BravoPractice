@@ -19,9 +19,6 @@ limitations under the License.
 <%
 java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy");
 request.setAttribute("year", sdf.format(new java.util.Date()));
-request.setAttribute("tomcatUrl", "http://tomcat.apache.org/");
-request.setAttribute("tomcatDocUrl", "/docs/");
-request.setAttribute("tomcatExamplesUrl", "/examples/");
 %>
 <!DOCTYPE html>
 <html lang="en">

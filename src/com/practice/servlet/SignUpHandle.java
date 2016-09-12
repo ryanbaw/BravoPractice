@@ -8,9 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.ItemsDAO;
-import entity.Cart;
-import entity.Items;
+import com.practice.dao.UsersDAO;
+import com.practice.vo.Users;
 
 public class SignUpHandle extends HttpServlet {
 
