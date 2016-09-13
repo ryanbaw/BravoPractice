@@ -229,7 +229,7 @@ public class UsersDAOImpl implements UsersDAO {
 	public boolean selectByNamePassword(String username, String password)
 			throws Exception {
 
-		String sql = "SELECT * FROM user WHERE username=? and password=?";
+		String sql = "SELECT * FROM usershort WHERE username=? and password=?";
 		PreparedStatement pstmt = null;
 		DatabaseControl dbc = null;
 		boolean ret = false;

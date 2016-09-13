@@ -2,13 +2,13 @@
 CREATE DATABASE IF NOT EXISTS `BRAVO`;
 USE `BRAVO`;
 
-CREATE TABLE IF NOT EXISTS `user` (
+CREATE TABLE IF NOT EXISTS `usershort` (
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `userdetail` (
+CREATE TABLE IF NOT EXISTS `user` (
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   `phone` varchar(20) NOT NULL,
@@ -23,8 +23,8 @@ CREATE TABLE IF NOT EXISTS `userdetail` (
 
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='';
 DELIMITER //
-CREATE TRIGGER `login_create_user` AFTER INSERT ON `userdetail` FOR EACH ROW BEGIN
-	INSERT INTO user(username, password) values(new.username, new.password);
+CREATE TRIGGER `login_create_user` AFTER INSERT ON `user` FOR EACH ROW BEGIN
+	INSERT INTO usershort(username, password) values(new.username, new.password);
 END//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
