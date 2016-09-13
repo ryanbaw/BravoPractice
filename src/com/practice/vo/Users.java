@@ -23,16 +23,17 @@ public class Users {
 		this.email = email;
 	}
 
-	public Users(String username, String password, String email, String phone,
-			String address, String sex, int age, String regtime) {
+	public Users(String username, String password, String phone, String email,
+			String address, String sex, int age, double money, String regtime) {
 		super();
 		this.username = username;
 		this.password = password;
-		this.email = email;
 		this.phone = phone;
+		this.email = email;
 		this.address = address;
 		this.sex = sex;
 		this.age = age;
+		this.money = money;
 		this.regtime = regtime;
 	}
 	

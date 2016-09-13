@@ -37,14 +37,14 @@ request.setAttribute("year", sdf.format(new java.util.Date()));
         <div class="zc">
             <div class="bj_bai">
                 <h3>登录</h3>
-                <form action="com/practice/servlet/LoginHandle" name="loginForm" method="post">
-                    <input name="username" type="text" class="kuang_txt" placeholder="请输入手机号">
-                    <input name="password" type="text" class="kuang_txt" placeholder="请输入密码">
+                <form action="servlet/LoginHandle" method="post">
+                    <input name="loginusername" type="text" class="kuang_txt" placeholder="请输入手机号">
+                    <input name="loginpassword" type="password" class="kuang_txt" placeholder="请输入密码">
                     <div>
                         <a href="#">忘记密码？</a>
                         <input name="rememberme" type="checkbox" value="remember" checked><span>记住我</span> 
                     </div>
-                    <input name="登录" type="button" class="btn_zhuce" value="登录">
+                    <input name="登录" type="submit" class="btn_zhuce" value="登录">
                 </form>
             </div>
             <div class="bj_right">

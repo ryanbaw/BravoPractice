@@ -36,6 +36,7 @@ build)
 	mkdir -p $BASE_HOME/WebRoot/WEB-INF/classes/com/practice/dao
 	mkdir -p $BASE_HOME/WebRoot/WEB-INF/classes/com/practice/dao/impl
 	mkdir -p $BASE_HOME/WebRoot/WEB-INF/classes/com/practice/dbc
+	mkdir -p $BASE_HOME/WebRoot/WEB-INF/classes/com/practice/factory
 	mkdir -p $BASE_HOME/WebRoot/WEB-INF/classes/com/practice/servlet
 	mkdir -p $BASE_HOME/WebRoot/WEB-INF/classes/com/practice/vo
 
@@ -46,7 +47,8 @@ build)
 	javac -d $TARGET_DIR com/practice/dao/impl/*.java
 	javac -d $TARGET_DIR com/practice/vo/*.java
 	javac -d $TARGET_DIR com/practice/dbc/*.java
-	javac -d $TARGET_DIR -classpath com/practice/dao:com/practice/vo:$CLASSPATH com/practice/servlet/*.java
+	javac -d $TARGET_DIR com/practice/factory/*.java
+	javac -d $TARGET_DIR -classpath com/practice/dao:com/practice/vo:com/practice/factory:$CLASSPATH com/practice/servlet/*.java
 
 	cd $BASE_HOME/WebRoot
 	

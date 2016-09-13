@@ -9,15 +9,7 @@ import com.practice.dao.UsersDAO;
 import com.practice.dbc.DatabaseControl;
 import com.practice.vo.Users;
 
-public class UserDAOImpl implements UsersDAO {
-	// Private String username;
-	// Private String password;
-	// Private String phone;
-	// Private String email;
-	// Private String address;
-	// Private String sex;
-	// Private String age;
-	// Private String money;
+public class UsersDAOImpl implements UsersDAO {
 
 	public void delete(Users user) throws Exception {
 
@@ -33,7 +25,7 @@ public class UserDAOImpl implements UsersDAO {
 			pstmt.setString(1, user.getUsername());
 			// 进行数据库更新操作
 			
-			pstmt.executeUpdate();			
+			pstmt.executeUpdate();
 		} catch (Exception e) {
 			throw new Exception("操作出现异常");
 		} finally {
@@ -64,7 +56,6 @@ public class UserDAOImpl implements UsersDAO {
 			// 关闭数据库连接
 			dbc.close();
 		}
-		
 	}
 
 	public void insert(Users user) throws Exception {
@@ -85,7 +76,7 @@ public class UserDAOImpl implements UsersDAO {
 			pstmt.setString(5, user.getAddress());
 			pstmt.setString(6, user.getSex());
 			pstmt.setInt(7, user.getAge());
-			pstmt.setInt(8, user.getMoney());
+			pstmt.setDouble(8, user.getMoney());
 			pstmt.setString(9, user.getRegtime());
 			// 进行数据库更新操作
 			pstmt.executeUpdate();
@@ -98,9 +89,9 @@ public class UserDAOImpl implements UsersDAO {
 		}
 	}
 
-	public void insert(String username, String password, String email,
+	public void insert(String username, String password, String phone,
 			String regtime) throws Exception {
-		String sql="INSERT INTO user (username,password,email) VALUES (?,?,?) ";
+		String sql="INSERT INTO user (username,password,phone) VALUES (?,?,?) ";
 		PreparedStatement pstmt = null;
 		DatabaseControl dbc = null;
 		
@@ -111,7 +102,7 @@ public class UserDAOImpl implements UsersDAO {
 			pstmt = dbc.getConnection().prepareStatement(sql);
 			pstmt.setString(1, username);
 			pstmt.setString(2, password);
-			pstmt.setString(3, email);
+			pstmt.setString(3, phone);
 			// 进行数据库更新操作
 			pstmt.executeUpdate();
 			pstmt.close();
@@ -121,7 +112,6 @@ public class UserDAOImpl implements UsersDAO {
 			// 关闭数据库连接
 			dbc.close();
 		}
-
 	}
 
 	public void insert(String username, String password, String phone,
@@ -154,12 +144,11 @@ public class UserDAOImpl implements UsersDAO {
 			// 关闭数据库连接
 			dbc.close();
 		}
-
 	}
 
 	public List<Users> selectAll() throws Exception {
 		List<Users> userlist = new ArrayList<Users>();
-		String sql = "SELECT * FROM user ";
+		String sql = "SELECT * FROM user";
 		PreparedStatement pstmt = null;
 		DatabaseControl dbc = null;
 		
@@ -171,8 +160,7 @@ public class UserDAOImpl implements UsersDAO {
 			pstmt = dbc.getConnection().prepareStatement(sql);
 			// 进行数据库查询操作
 			ResultSet rs = pstmt.executeQuery();
-						
-            
+
 			while(rs.next()) {
 				// 查询出内容，之后将查询出的内容赋值给user对象
 				Users user=new Users();
@@ -198,8 +186,7 @@ public class UserDAOImpl implements UsersDAO {
 		}
 		return userlist;
 	}
-	
-	
+
 	public Users selectByName(String username) throws Exception {
 		Users user = null;
 		String sql = "SELECT * FROM user WHERE username=?";
@@ -214,20 +201,20 @@ public class UserDAOImpl implements UsersDAO {
 			pstmt = dbc.getConnection().prepareStatement(sql);
 			pstmt.setString(1, username);
 			// 进行数据库查询操作
-			 rs= pstmt.executeQuery();
+			rs= pstmt.executeQuery();
 			if (rs.next()) {
 				// 查询出内容，之后将查询出的内容赋值给user对象
 				user=new Users();
 				user.setUsername(rs.getString(1));
 				user.setPassword(rs.getString(2));
-				user.setEmail(rs.getString(3));
-				user.setPhone(rs.getString(4));
+				user.setPhone(rs.getString(3));
+				user.setEmail(rs.getString(4));
 				user.setAddress(rs.getString(5));
 				user.setSex(rs.getString(6));
 				user.setAge(rs.getInt(7));
-				user.setRegtime(rs.getString(8));
+				user.setMoney(rs.getDouble(8));
+				user.setRegtime(rs.getString(9));
 			}
-			
 		} catch (Exception e) {
 			throw new Exception("操作出现异常");
 		} finally {
@@ -240,13 +227,13 @@ public class UserDAOImpl implements UsersDAO {
 	}
 	
 	public boolean selectByNamePassword(String username, String password)
-	throws Exception {
+			throws Exception {
 
 		String sql = "SELECT * FROM user WHERE username=? and password=?";
 		PreparedStatement pstmt = null;
 		DatabaseControl dbc = null;
 		boolean ret = false;
-		ResultSet rs=null;
+		ResultSet rs = null;
 		// 下面是针对数据库的具体操作
 		try {
 			// 连接数据库
@@ -296,12 +283,13 @@ public class UserDAOImpl implements UsersDAO {
 					Users user=new Users();
 					user.setUsername(rs.getString(1));
 					user.setPassword(rs.getString(2));
-					user.setEmail(rs.getString(3));
-					user.setPhone(rs.getString(4));
+					user.setPhone(rs.getString(3));
+					user.setEmail(rs.getString(4));
 					user.setAddress(rs.getString(5));
 					user.setSex(rs.getString(6));
 					user.setAge(rs.getInt(7));
-					user.setRegtime(rs.getString(8));
+					user.setMoney(rs.getDouble(8));
+					user.setRegtime(rs.getString(9));
 					// 将查询出来的数据加入到List对象之中
 					userlist.add(user);
 				}
@@ -314,12 +302,12 @@ public class UserDAOImpl implements UsersDAO {
 			// 关闭数据库连接
 			dbc.close();
 		}
+
 		return userlist;
-		
 	}
 
 	public void update(Users user) throws Exception {
-		String sql = "UPDATE user SET password=?,email=?,phone=?,address=?,sex=?,age=?,regtime=? WHERE username=?";
+		String sql = "UPDATE user SET password=?,phone=?,email=?,address=?,sex=?,age=?,regtime=? WHERE username=?";
 		PreparedStatement pstmt = null;
 		DatabaseControl dbc = null;
 		
@@ -329,8 +317,8 @@ public class UserDAOImpl implements UsersDAO {
 			dbc = new DatabaseControl();
 			pstmt = dbc.getConnection().prepareStatement(sql);
 			pstmt.setString(1, user.getPassword());
-			pstmt.setString(2, user.getEmail());
-			pstmt.setString(3, user.getPhone());
+			pstmt.setString(2, user.getPhone());
+			pstmt.setString(3, user.getEmail());
 			pstmt.setString(4, user.getAddress());
 			pstmt.setString(5, user.getSex());
 			pstmt.setInt(6, user.getAge());
@@ -348,8 +336,8 @@ public class UserDAOImpl implements UsersDAO {
 
 	}
 
-	public void updatePassword(String username, String password) throws Exception {
-		
+	public void updatePassword(String username, String password)
+			throws Exception {
 
 		String sql = "UPDATE user SET password=? WHERE username=?";
 		PreparedStatement pstmt = null;
@@ -361,6 +349,31 @@ public class UserDAOImpl implements UsersDAO {
 			dbc = new DatabaseControl();
 			pstmt = dbc.getConnection().prepareStatement(sql);
 			pstmt.setString(1, password);
+			pstmt.setString(2, username);
+			// 进行数据库更新操作
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (Exception e) {
+			throw new Exception("操作出现异常");
+		} finally {
+			// 关闭数据库连接
+			dbc.close();
+		}
+	}
+
+	public void updatePhone(String username, String phone)
+			throws Exception {
+		String sql = "UPDATE user SET phone=? WHERE username=? ";
+		PreparedStatement pstmt = null;
+		DatabaseControl dbc = null;
+
+		// 下面是针对数据库的具体操作
+		try {
+			// 连接数据库
+			dbc = new DatabaseControl();
+			pstmt = dbc.getConnection().prepareStatement(sql);
+			
+			pstmt.setString(1, phone);
 			pstmt.setString(2, username);
 			// 进行数据库更新操作
 			pstmt.executeUpdate();
@@ -396,7 +409,6 @@ public class UserDAOImpl implements UsersDAO {
 			// 关闭数据库连接
 			dbc.close();
 		}
-
 	}
 	
 	public void updateAddress(String username, String address) throws Exception {
@@ -422,13 +434,37 @@ public class UserDAOImpl implements UsersDAO {
 			// 关闭数据库连接
 			dbc.close();
 		}
-		
 	}
 
-	public void updtae(String username, String password, String email,
-			String phone, String address, String sex, int age, String regtime)
+	public void updateMoney(String username, String money) throws Exception {
+
+		String sql = "UPDATE user SET money=? WHERE username=? ";
+		PreparedStatement pstmt = null;
+		DatabaseControl dbc = null;
+		
+		// 下面是针对数据库的具体操作
+		try {
+			// 连接数据库
+			dbc = new DatabaseControl();
+			pstmt = dbc.getConnection().prepareStatement(sql);
+			
+			pstmt.setString(1, money);
+			pstmt.setString(2, username);
+			// 进行数据库更新操作
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (Exception e) {
+			throw new Exception("操作出现异常");
+		} finally {
+			// 关闭数据库连接
+			dbc.close();
+		}
+	}
+
+	public void updtae(String username, String password, String phone,
+			String email, String address, String sex, int age, String regtime)
 			throws Exception {
-		String sql = "UPDATE user SET password=?,email=?,phone=?,address=?,sex=?,age=?,regtime=? WHERE username=?";
+		String sql = "UPDATE user SET password=?,phone=?,email=?,address=?,sex=?,age=?,regtime=? WHERE username=?";
 		PreparedStatement pstmt = null;
 		DatabaseControl dbc = null;
 		
@@ -438,8 +474,8 @@ public class UserDAOImpl implements UsersDAO {
 			dbc = new DatabaseControl();
 			pstmt = dbc.getConnection().prepareStatement(sql);
 			pstmt.setString(1, password);
-			pstmt.setString(2, email);
 			pstmt.setString(3, phone);
+			pstmt.setString(2, email);
 			pstmt.setString(4, address);
 			pstmt.setString(5, sex);
 			pstmt.setInt(6, age);
@@ -454,11 +490,5 @@ public class UserDAOImpl implements UsersDAO {
 			// 关闭数据库连接
 			dbc.close();
 		}
-
 	}
-
-	
-
-	
-
 }

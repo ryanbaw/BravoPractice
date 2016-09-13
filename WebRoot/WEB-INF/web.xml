@@ -20,11 +20,11 @@
 
 	<servlet-mapping>
 		<servlet-name>LoginHandle</servlet-name>
-		<url-pattern>/com/practice/servlet/LoginHandle</url-pattern>
+		<url-pattern>/servlet/LoginHandle</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>SignUpHandle</servlet-name>
-		<url-pattern>/com/practice/servlet/SignUpHandle</url-pattern>
+		<url-pattern>/servlet/SignUpHandle</url-pattern>
 	</servlet-mapping>
 
 	<welcome-file-list>

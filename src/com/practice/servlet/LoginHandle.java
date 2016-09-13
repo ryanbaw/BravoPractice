@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.practice.dao.*;
+import com.practice.vo.*;
+import com.practice.factory.*;
 
 public class LoginHandle extends HttpServlet {
 
@@ -58,9 +60,19 @@ public class LoginHandle extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		out.println("登录成功");
+		String loginusername = request.getParameter("loginusername");
+		String loginpassword = request.getParameter("loginpassword");
+		try {
+			if(DAOFactory.getUserDAOInstance().selectByNamePassword(loginusername, loginpassword)){
+				// Users user = DAOFactory.getUserDAOInstance().selectByName(loginusername);
+				// request.getSession().setAttribute("loginusername", user);
+				response.sendRedirect(request.getContextPath()+"/login_success.jsp");
+			}else{
+				response.sendRedirect(request.getContextPath()+"/login_failure.jsp");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
